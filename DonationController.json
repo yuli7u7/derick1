@@ -1,0 +1,16 @@
+{
+    "donaciones": [
+        {
+            "id": 1,
+            "nombre": "Donación 1",
+            "monto": 100.0,
+            "fecha": "2023-02-20"
+        },
+        {
+            "id": 2,
+            "nombre": "Donación 2",
+            "monto": 200.0,
+            "fecha": "2023-02-21"
+        }
+    ]
+}

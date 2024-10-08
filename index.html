@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mi Portafolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #e0e0e0; /* Cambiado a un tono más oscuro */
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background-color: #1a1a2e; /* Cambiado a un tono oscuro azulado */
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        header h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #ffffff; /* Cambiado a blanco para mejor visibilidad */
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        nav ul li {
+            display: inline-block;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #ffffff; /* Cambiado a blanco para mejor visibilidad */
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #007BFF;
+        }
+
+        .cta-button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: #0056b3;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 100px 5%;
+            background-color: #162447; /* Cambiado a un tono oscuro azulado */
+        }
+
+        .hero-text {
+            max-width: 50%;
+        }
+
+        .hero-text h2 {
+            font-size: 40px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #FFA500; /* Cambiado a un tono anaranjado */
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #ffffff; /* Cambiado a blanco para mejor visibilidad */
+        }
+
+        .hero-text .cta-button {
+            padding: 15px 30px;
+            font-size: 18px;
+        }
+
+        .hero-image img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            padding: 40px 5%;
+            text-align: center;
+            background-color: #333;
+            color: #ffffff; /* Asegurando que el texto del footer sea blanco */
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        footer a {
+            color: #007BFF; /* Manteniendo el color azul para los enlaces */
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <h1>Portafolio de Deryvo</h1>
+        <nav>
+            <ul>
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="proyectos.html">Proyectos</a></li> <!-- Ahora este enlace lleva a la nueva página de proyectos -->
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
+        </nav>
+        <a href="contacto.html" class="cta-button">Contáctame</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-text">
+            <h2>Crea soluciones innovadoras para la web</h2>
+            <p>Desarrollador web con pasión por resolver problemas reales a través de soluciones digitales.</p>
+            <a href="proyectos.html" class="cta-button">Ver mis proyectos</a> <!-- Redirige a la nueva página de proyectos -->
+        </div>
+        <div class="hero-image">
+            <img src="https://www.unitec.mx/hubfs/Imported_Blog_Media/para-que-sirve-la-programacion-1-compressor.jpg" alt="Proyectos Recientes">
+        </div>
+    </section>
+
+    <!-- Donation Section -->
+    <section class="donation-container">
+        <h2>Apoya mi Trabajo</h2>
+        <p>Si te gusta mi contenido y deseas apoyar mi trabajo, puedes hacerlo a través de una donación por PayPal. ¡Cualquier aporte es bienvenido!</p>
+        
+        <!-- PayPal Button -->
+        <div id="paypal-button-container"></div>
+        
+        <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID"></script>
+        <script>
+            paypal.Buttons({
+                createOrder: function(data, actions) {
+                    return actions.order.create({
+                        purchase_units: [{
+                            amount: {
+                                value: '10.00' // Cambia el valor según sea necesario
+                            }
+                        }]
+                    });
+                },
+                onApprove: function(data, actions) {
+                    return actions.order.capture().then(function(details) {
+                        alert('Gracias por tu donación, ' + details.payer.name.given_name);
+                    });
+                }
+            }).render('#paypal-button-container');
+        </script>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Portafolio de Deryvo - Todos los derechos reservados</p>
+        <p><a href="derikespinoza2002@gmail.com">derikespinoza2002@gmail.com</a></p>
+    </footer>
+</body>
+</html>
+recordatorio Para hacer que tu página web sea pública, puedes seguir estos pasos:
+Alojamiento Web:
+Selecciona un proveedor de alojamiento: Elige un servicio de hosting (como Bluehost, SiteGround, HostGator, etc.) que se adapte a tus necesidades.
+Registra un dominio: Si no tienes un dominio, regístralo a través del proveedor de hosting o un registrador de dominios (como GoDaddy, Namecheap, etc.).
+Sube tus archivos:
+Usa un cliente FTP: Descarga un cliente FTP como FileZilla.
+Conéctate a tu servidor: Usa las credenciales FTP proporcionadas por tu proveedor de hosting para conectarte.
+Sube tus archivos: Arrastra y suelta tus archivos (incluyendo index.html) en la carpeta pública del servidor (generalmente llamada public_html).
+Configura tu dominio:
+Apunta tu dominio al servidor: Si compraste el dominio por separado, asegúrate de que los registros DNS apunten a tu servidor de hosting. Esto puede implicar cambiar los servidores de nombres en el panel de control de tu registrador de dominios.
+Verifica la publicación:
+Abre un navegador y escribe tu dominio (por ejemplo, http://tudominio.com). Si todo está configurado correctamente, deberías ver tu página web en línea.
+Notas:
+Asegúrate de que tu página cumpla con las políticas de contenido del proveedor de hosting.
+Si usas XAMPP para desarrollo local, recuerda que no es adecuado para producción sin configuraciones adicionales de seguridad.

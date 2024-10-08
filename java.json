@@ -1,0 +1,77 @@
+package com.portafolio;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class PortafolioApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(PortafolioApplication.class, args);
+    }
+}
+import com.paypal.api.payments.*;
+import com.paypal.base.rest.APIContext;
+import com.paypal.base.rest.PayPalRESTException;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class PayPalDonation {
+
+    private static final String CLIENT_ID = "TU_CLIENT_ID_PAYPAL";
+    private static final String CLIENT_SECRET = "TU_CLIENT_SECRET_PAYPAL";
+    private static final String MODE = "sandbox"; // Usa 'live' para producción
+
+    public String createPayment(String total) {
+        // Configurar contexto API
+        APIContext context = new APIContext(CLIENT_ID, CLIENT_SECRET, MODE);
+
+        // Configurar detalles del pago
+        Amount amount = new Amount();
+        amount.setCurrency("USD");
+        amount.setTotal(total);
+
+        Transaction transaction = new Transaction();
+        transaction.setAmount(amount);
+        transaction.setDescription("Donación para apoyar el trabajo");
+
+        List<Transaction> transactions = new ArrayList<>();
+        transactions.add(transaction);
+
+        // Configurar el pagador
+        Payer payer = new Payer();
+        payer.setPaymentMethod("paypal");
+
+        // Configurar el pago
+        Payment payment = new Payment();
+        payment.setIntent("sale");
+        payment.setPayer(payer);
+        payment.setTransactions(transactions);
+
+        RedirectUrls redirectUrls = new RedirectUrls();
+        redirectUrls.setCancelUrl("http://tu-sitio.com/cancelar");
+        redirectUrls.setReturnUrl("http://tu-sitio.com/exito");
+        payment.setRedirectUrls(redirectUrls);
+
+        // Crear el pago
+        try {
+            Payment createdPayment = payment.create(context);
+            return createdPayment.getLinks().get(1).getHref(); // Devuelve el enlace de PayPal para completar el pago
+        } catch (PayPalRESTException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
+        PayPalDonation donation = new PayPalDonation();
+        String paymentLink = donation.createPayment("10.00"); // Monto de la donación
+        if (paymentLink != null) {
+            System.out.println("Enlace de PayPal para completar el pago: " + paymentLink);
+        } else {
+            System.out.println("Error creando el pago.");
+        }
+    }
+}
+
